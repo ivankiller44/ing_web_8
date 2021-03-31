@@ -1,8 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 .navbar-custom {
-    background-color: #d4edda;
+    background-color: #E37222;
 }
 
 .nav-link {
-    color: #1e582f;
+    color: #ffffff;
+}
+
+.alert-custom {
+    background-color: #E37222;
+}
+
+.alert-link {
+    color: #ffffff;
 }
