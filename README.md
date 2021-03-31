@@ -5,7 +5,7 @@ Existe en el documento dos carpetas una es de frontend con Angular y la otra es 
 
 para correr el Python crean un entorno virtual 
 para correr el Angular, correrlo con npm 
-  =>npm install 'repo'
+  =>npm install 'repo_angular = Angular Django Integrating CRUD Aplication'
   =>npm start
   
   
