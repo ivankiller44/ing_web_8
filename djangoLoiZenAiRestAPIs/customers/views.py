@@ -12,7 +12,7 @@ from rest_framework.decorators import api_view
 
 
 @csrf_exempt
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 def customer_list(request):
     if request.method == 'GET':
         try:
@@ -62,9 +62,13 @@ def customer_list(request):
             }
             return JsonResponse(exceptionError, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    elif request.method == 'DELETE':
+        count = Customer.objects.all().delete()
+        return JsonResponse({'message': '{} Customers were deleted successfully!!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
 
 @csrf_exempt
-@api_view(['PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def customer_detail(request, pk):
     try:
         customer = Customer.objects.get(pk=pk)
@@ -76,7 +80,12 @@ def customer_detail(request, pk):
         }
         return JsonResponse(exceptionError, status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'PUT':
+    if request.method == 'GET':
+
+        customer_serializer = CustomerSerializer(customer)
+        return JsonResponse(customer_serializer.data)
+
+    elif request.method == 'PUT':
         try:
             customer_data = JSONParser().parse(request)
             customer_serializer = CustomerSerializer(
